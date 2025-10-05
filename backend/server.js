@@ -2,9 +2,7 @@
 
 import express from "express";
 import dotenv from "dotenv";
-import db from "./db.js";
 dotenv.config();
-
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,3 +15,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("server runing at : ", PORT);
 });
+
+
+// console.log(process)
+

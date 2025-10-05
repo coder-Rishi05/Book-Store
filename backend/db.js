@@ -1,13 +1,19 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+const url = process.env.localURL;
 
-mongoose.connect("mongodb://127.0.0.1:27017/bookStore");
+const connectDB = async () => {
+  try {
+    await mongoose.connect(url);
+    console.log("✅ Successfully connected to MongoDB");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err.message);
+  }
+};
+
+connectDB();
 
 const db = mongoose.connection;
 
-
-db.on("connected", () => console.log("✅ Successfully connected to MongoDB"));
 db.on("disconnected", () => console.log("⚠️ Disconnected from MongoDB"));
-db.on("error", (err) => console.log("❌ Error connecting to MongoDB:", err));
-
-
-export default db;
