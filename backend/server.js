@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import {connectDB} from "./db.js";
+import { connectDB } from "./db.js";
 import { Book } from "./models/bookModel.js";
 
 dotenv.config();
@@ -18,8 +18,8 @@ app.get("/", (req, res) => {
 // POST: Add a new book
 app.post("/books", async (req, res) => {
   try {
-    const { title, author, publishYear } = req.body;
-    if (!title || !author || !publishYear) {
+    const { title, author, publishyear } = req.body;
+    if (!title || !author || !publishyear) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -69,9 +69,9 @@ app.get("/books/:id", async (req, res) => {
 app.put("/books/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, author, publishYear } = req.body;
+    const { title, author, publishyear } = req.body;
 
-    if (!title || !author || !publishYear) {
+    if (!title || !author || !publishyear) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
