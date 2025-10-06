@@ -31,7 +31,9 @@ app.post("/books", async (req, res) => {
       book: savedBook,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error posting data", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error posting data", error: error.message });
   }
 });
 
@@ -45,7 +47,9 @@ app.get("/books", async (req, res) => {
       books,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching data", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching data", error: error.message });
   }
 });
 
@@ -61,7 +65,9 @@ app.get("/books/:id", async (req, res) => {
 
     res.status(200).json({ message: "Book fetched successfully", book });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching data", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching data", error: error.message });
   }
 });
 
@@ -75,7 +81,9 @@ app.put("/books/:id", async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const updatedBook = await Book.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedBook = await Book.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
 
     if (!updatedBook) {
       return res.status(404).json({ message: "Book not found" });
@@ -86,7 +94,28 @@ app.put("/books/:id", async (req, res) => {
       book: updatedBook,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error updating data", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error updating data", error: error.message });
+  }
+});
+
+// delete a route.
+
+app.delete("/books/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteData = await Book.findByIdAndDelete(id);
+    if(!deleteData) return res.status(404).json({message:"Data not found by this id"})
+    res
+      .status(200)
+      .json({
+        message: "data deleted successfully",
+        data: deleteData,
+        TotalBooks: Book.length,
+      });
+  } catch (error) {
+    res.status(500).json({ message: "Can't delete the data. " });
   }
 });
 
