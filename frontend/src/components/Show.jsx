@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import Backbtn from "./Backbtn";
+import Loader from "../Loader/Loader";
 
 const Show = () => {
+ 
   return (
-    <div>
-      Show
+    <div className="p-4" >
+      
     </div>
-  )
-}
+  );
+};
 
-export default Show
+export default Show;
