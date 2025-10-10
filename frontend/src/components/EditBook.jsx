@@ -29,7 +29,7 @@ const EditBook = () => {
         alert("An error happened. Please check console");
         console.log(error);
       });
-  }, []); // ✅ Only run once when component mounts
+  }, []); 
 
   const handleEditBook = () => {
     const data = {
