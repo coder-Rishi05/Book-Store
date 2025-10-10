@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Backbtn from "./Backbtn";
 import Loader from "../Loader/Loader";
+import { enqueueSnackbar, useSnackbar } from "notistack";
 
 const EditBook = () => {
   const [title, setTitle] = useState("");
@@ -29,7 +30,7 @@ const EditBook = () => {
         alert("An error happened. Please check console");
         console.log(error);
       });
-  }, []); 
+  }, []);
 
   const handleEditBook = () => {
     const data = {
@@ -43,13 +44,14 @@ const EditBook = () => {
       .put(`http://localhost:3000/books/${id}`, data)
       .then(() => {
         setLoading(false);
-        alert("Book updated successfully ✅");
+
+        enqueueSnackbar("Book created Successfully ", { variant: "success" });
         navigate("/");
       })
       .catch((error) => {
         setLoading(false);
-        alert("An error happened. Please check console");
         console.log(error);
+        enqueueSnackbar("Book created Successfully ", { variant: "success" });
       });
   };
 

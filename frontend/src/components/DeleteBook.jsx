@@ -15,11 +15,13 @@ function DeleteBook() {
       .delete(`http://localhost:3000/books/${id}`)
       .then(() => {
         setLoading(false);
+
+        enqueueSnackbar("Book created Successfully ", { variant: "success" });
         navigate("/");
       })
       .catch((err) => {
         setLoading(false);
-        alert("An error happend check console");
+        enqueueSnackbar("Error ", { variant: "error" });
         console.log(err);
       });
   };

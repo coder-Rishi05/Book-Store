@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Backbtn from "./Backbtn";
 import Loader from "../Loader/Loader";
+import { enqueueSnackbar, useSnackbar } from "notistack";
 
 const CreateBooks = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [publishyear, setPublishYear] = useState("");
-
+  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -20,10 +21,14 @@ const CreateBooks = () => {
       .post("http://localhost:3000/books", data)
       .then(() => {
         setLoading(false);
+        
+        enqueueSnackbar("Book created Successfully ", { variant: "success" });
         navigate("/");
       })
       .catch((err) => {
         setLoading(false);
+
+        enqueueSnackbar("Error ", { variant: "error" });
         alert("An error happened. Please Chech console.");
         console.log(err);
       });
