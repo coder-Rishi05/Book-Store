@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Backbtn from "./Backbtn";
 import Loader from "../Loader/Loader";
+import { enqueueSnackbar, useSnackbar } from "notistack";
+
 
 function DeleteBook() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
+  const { enqueueSnackbar } = useSnackbar();
   const handleDeleteBook = () => {
     setLoading(true);
     axios
